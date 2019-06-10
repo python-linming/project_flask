@@ -8,7 +8,11 @@ from flask_wtf import CSRFProtect
 from redis import StrictRedis
 from configXC import  config
 
+
 db = SQLAlchemy()#初始化数据库，在flask很多扩展里面都可以先初始化扩展的对象，然后再去调用init_app方法去初始化
+
+redis_store = None # type: StrictRedis
+# redis_store:StrictRedis = None
 
 def setup_log(config_name):
     #设置日志的记录等级
@@ -29,10 +33,15 @@ def create_app(config_name):
     app.config.from_object(config[config_name])
 
     db.init_app(app)
+    global redis_store
     # 初始化redis存储对象
     redis_store = StrictRedis(host=config[config_name].REDIS_HOST, port=config[config_name].REDIS_PORT)
     # 开启当前项目CSRF保护
     CSRFProtect(app)
-
     Session(app)
+    from info.modules.index import index_blu
+    #注册蓝图
+    app.register_blueprint(index_blu)
+
+
     return  app #要返回app
