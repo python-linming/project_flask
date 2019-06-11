@@ -8,10 +8,10 @@ class Config(object):
     DEBUG = True
     SECRET_KEY = "b'q8TpYy2LUznFeGhmBro/pE9jxAUzVq9Z0dVlAYUq9vStAS64rGWLGDuzEb74LE4I'"
     #为数据库添加配置
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:mysql@192.168.25.255:3306/information27'
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:mysql@localhost:3306/information27'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     #redis配置
-    REDIS_HOST = '192.168.25.129'
+    REDIS_HOST = "192.168.25.131"
     REDIS_PORT = 6379
     #Session保存位置
     SESSION_TYPE = 'redis'
